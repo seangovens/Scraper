@@ -38,7 +38,7 @@ def lookup(s, names, job, dic):
     for name in names:
         try:
             if name not in dic:
-                time.sleep(random.randrange(2, 5))
+                #time.sleep(random.randrange(2, 5))
                 p = s.get_person(name, job)
                 scores = p.get_scores(job_specific=True)
                 dic[name] = scores
@@ -125,15 +125,16 @@ def main():
                         out = open("out.csv", "a")
                         out.write(",".join(str_ent) + "\n")
                         out.close()
+                        dump(director_dic, writer_dic, actor_dic, movie_dic)
                         print("Wrote {} to file".format(movie))
                     else:
                         print("{} has no score".format(movie))
                     movie_dic[movie] = True
-                    time.sleep(random.randrange(5, 20))
+                    time.sleep(random.randrange(1, 4))
             except AttributeError:
                 try:
                     movie_dic[movie] = True
-                    time.sleep(random.randrange(2, 5))
+                    time.sleep(random.randrange(1, 4))
                     print("Failed to get movie: {}".format(movie))
                 except KeyboardInterrupt:
                     dump(director_dic, writer_dic, actor_dic, movie_dic)
